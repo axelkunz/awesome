@@ -5,15 +5,15 @@
 
         <div class="form-group">
           <label for="inputUsername">Benutzername</label>
-          <input type="text" class="form-control" id="inputUsername" placeholder="Benutzername" [(ngModel)]="username" name="username" autofocus>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Benutzername" (keyup)="onKey($event)" name="username" autofocus>
         </div>
 
         <div class="form-group">
           <label for="inputPassword">Passwort</label>
-          <input type="password" class="form-control" id="inputPassword" placeholder="Passwort" [(ngModel)]="password" name="password">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Passwort" (keyup)="onKey($event)" name="password">
         </div>
 
-        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || isLocked">Anmelden</button>
+        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="isLocked()">Anmelden</button>
 
       </form>
 

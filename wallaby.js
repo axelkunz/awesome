@@ -9,8 +9,8 @@ module.exports = function (wallaby) {
 
   var webpackPostprocessor = wallabyWebpack({
     entryPatterns: [
-      'src/wallabyTest.ts',
-      'src/**/*spec.ts'
+      'src/wallabyTest.js',
+      'src/**/*spec.js'
     ],
 
     module: {

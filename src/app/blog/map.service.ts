@@ -13,6 +13,7 @@ export class MapService {
 
   private initMap(mobile = false): void {
     const MAP_ID = mobile ? 'mobile-map' : 'map'
+    // TODO: change L.map to new Map
     this.map = L.map(MAP_ID, {
         center: [50.004716, 8.263407],
         zoom: 2,
