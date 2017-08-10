@@ -1,0 +1,7 @@
+a {
+  pointer-events: none;
+}
+
+.container {
+  margin-bottom: 15px;
+}

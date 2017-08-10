@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <h3>Create new user</h3>
+
+      <form>
+
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control" placeholder="username" name="username" [(ngModel)]="newUser.username">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" placeholder="password" name="password" [(ngModel)]="newUser.password">
+        </div>
+
+        <div class="form-group" [class.has-error]="newUser.passwordConfirm && newUser.passwordConfirm !== newUser.password" [class.has-success]="newUser.passwordConfirm && newUser.passwordConfirm === newUser.password">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" placeholder="confirm password" name="confirmPassword" [(ngModel)]="newUser.passwordConfirm">
+        </div>
+
+        <!-- <div class="form-group">
+          <label>Role</label>
+          <select class="form-control" name="role" [(ngModel)]="newUser.role">
+            <option *ngFor="let role of roles" value="{{ role }}">{{ role }}</option>
+          </select>
+        </div> -->
+
+        <button type="submit" class="btn btn-default" (click)="create()" [disabled]="!newUser.password || !newUser.passwordConfirm || newUser.password !== newUser.passwordConfirm">Create</button>
+
+      </form>
+    </div>
+  </div>
+</div>

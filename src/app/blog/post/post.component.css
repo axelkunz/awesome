@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700");
+
+#post {
+  margin-top: 85px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-bottom: 15px;
+  padding-right: 20px;
+}
+
+h3 {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+p {
+  /*width: 990px;*/
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.post-date {
+  font-family: "Roboto", sans-serif;
+  color: gray;
+  margin-top: 40px;
+}
+
+.like-button {
+  padding-left: 15px;
+  opacity: 0.9;
+  font-size: 26px;
+  vertical-align: middle;
+}
+
+.like-text {
+  font-size: 12px;
+}
+
+.user {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#likes {
+  margin-bottom: 23px;
+}
+
+:host >>> a.image-link {
+  text-decoration: none;
+  color: initial;
+}
+
+/* style post"s inner html */
+:host >>> span.reference {
+  cursor: pointer;
+  color: rgba(41, 130, 203, 1); /* leaflet marker color */
+
+  /* add image to left of text */
+  background-image: url("https://unpkg.com/leaflet@1.0.1/dist/images/marker-icon.png");
+  background-size: contain; /* fit height of image to span size */
+  background-repeat: no-repeat;
+  padding-left: 16px;  /* width of the image plus a little extra padding */
+}
+
+:host >>> figure {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+:host >>> figcaption {
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+:host >>> iframe {
+  width: 100%;
+  height: 250px;
+}
+
+/* hide location links on smaller devices */
+@media (max-width: 991px) {
+  :host >>> span.reference {
+    cursor: default;
+    color: initial;
+    padding-left: 0px;
+    background-image: none;
+  }
+
+  /* disable picture lightbox on smaller devices */
+  :host >>> figure {
+    cursor: default;
+    pointer-events: none;
+  }
+
+}

@@ -1,0 +1,15 @@
+<div class="container-fluid" (window:resize)="onWindowResize($event)">
+  <div class="row">
+
+    <div id="map-panel" class="col-md-7 hidden-sm hidden-xs">
+      <div id="map"></div>
+    </div>
+
+    <div id="side-panel" class="col-md-5 pull-right">
+      <app-navbar *ngIf="isMobile"></app-navbar>
+      <router-outlet></router-outlet>
+    </div>
+    
+  </div>
+</div>
+

@@ -1,0 +1,18 @@
+
+<div id="comments">
+  <!-- comments -->
+  <div *ngFor="let comment of comments" class="comment">
+    <span class="comment-text">{{ comment.text }}</span>
+    <!-- <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(comment)"></i> -->
+
+    <div class="meta">
+      <span class="comment-user">{{ comment.username }}</span>
+      <span class="comment-timespan">{{ getFormattedDate(comment.createdAt) }}</span>
+    </div>
+    
+  </div>
+
+  <!-- new comment -->
+  <textarea id="comment-area" class="form-control" rows="2" placeholder="Kommentar schreiben..." [(ngModel)]="newComment.text" (focus)="hasFocus = true" (blur)="hasFocus = false"></textarea>
+  <span id="send" *ngIf="hasFocus || newComment.text" [class.inactive]="hasFocus && !newComment.text" (click)="create()">Senden</span>
+</div>

@@ -1,0 +1,44 @@
+
+<button *ngIf="!isMobile" class="btn btn-link" (click)="showOverview()">
+  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+  Übersicht
+</button>
+
+<div id="post" *ngIf="post" (window:resize)="onWindowResize($event)">
+
+  <span class="post-date">{{ getFormattedDate(post.publishedAt) }}</span>
+
+  <h3>
+    {{ post.title }}
+    
+    <span class="like-button" (click)="like()">
+      <i class="fa" [class.fa-heart]="hasLiked" [class.fa-heart-o]="!hasLiked" [style.color]="getColor()" aria-hidden="true"></i>
+    </span>
+    
+  </h3>
+
+  <p [innerHtml]="unsafeHtml"></p>
+
+  <div id="likes" *ngIf="post.likes">
+    <span *ngFor="let username of post.likes; let i = index">
+      <span class="user">{{ username }}</span>
+      <span class="like-text">{{ getSeparator(i) }}</span>
+    </span>
+    <span class="like-text">gefällt das.</span>
+  </div>
+
+  <app-comments [comments]="post.comments" (onNewComment)="addComment($event)" (onCommentDelete)="deleteComment($event)"></app-comments>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-body">
+        <i id="close-button" class="fa fa-times" aria-hidden="true" (click)="closeMap()"></i>
+        <div id="map-mobile"></div>
+      </div>
+    </div>
+
+  </div>
+</div>

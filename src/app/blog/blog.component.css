@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css?family=Londrina+Shadow|Londrina+Outline|Londrina+Sketch|Lato:400,700|Vollkorn:400,700,700i|Fredericka+the+Great|Open+Sans|Shrikhand|Roboto:400,500,700,900");
+
+.container-fluid {
+  /* reset bootstrap */
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  /* reset bootstrap margin */
+  padding: 0;
+  margin: 0;
+}
+
+#map-panel {
+  padding: 0; /* reset bootstrap padding */
+  border-right: 1px solid darkgray;
+  position: fixed;
+}
+
+#map {
+  height: 100vh;
+}
+
+#map-mobile {
+  height: calc(100vh - 2px);
+  width: 100%;
+}
+
+#close-button {
+  padding: 12px;
+  font-size: 26px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1040;
+}
+
+#side-panel {
+  padding: 0;
+}
+
+i.fa-map-marker {
+  /*color: rgb(40, 130, 200);*/
+}
+
+.vcenter {
+  /*display: inline-block;
+  vertical-align: middle;
+  float: none;*/
+
+  min-height: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center; /* horizontally */
+  align-items: center; /* vertically */
+}
+
+/* prevent content being blocked by the mobile navbar on phones */
+@media (max-width: 480px) {
+  #side-panel {
+    padding-top: 60px;
+  }
+}
+
+/* hide location links on smaller devices */
+@media (max-width: 991px) {
+  .vcenter {
+    min-width: 100%;
+    min-width: 100vw;
+  }
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid rgba(41, 130, 203, 1);
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+
+.modal-body {
+  margin: 0;
+  padding: 0;
+}

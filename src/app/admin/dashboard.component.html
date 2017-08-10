@@ -1,0 +1,132 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Admin Area</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--<li [class.active]="activeTab === 'dashboard'" (click)="activeTab = 'dashboard'"><a href="#">Dashboard</a></li>-->
+        <li [class.active]="activeTab === 'posts'" (click)="activeTab = 'posts'"><a href="#">Posts</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" (click)="activeTab = 'posts'">Posts</a></li>
+            <li><a href="#">Create new post</a></li>
+          </ul>
+        </li>
+        <li [class.active]="activeTab === 'users'"><a routerLink="/#/admin/users" routerLinkActive="active">Users</a></li>
+        <li [class.active]="activeTab === 'stats'" (click)="activeTab = 'stats'"><a href="#">Statistics</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<router-outlet></router-outlet>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <router-outlet name="admin"></router-outlet>
+      
+      <!-- show posts -->
+      <!--<div id="posts" *ngIf="activeTab === 'posts'">
+        <table class="table table-hover" *ngIf="posts">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of posts | orderBy: ['publishedAt']: 'desc'; let i = index" (click)="editPost(post._id)">
+              <td>{{ post.title }}</td>
+              <td>
+                <span class="label label-default" *ngIf="!post.published">Draft</span>
+                <span class="label label-success" *ngIf="post.published">Published</span>
+              </td>
+              <td>{{ post.viewCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="btn btn-default" (click)="openNewPost()">Create new post</button>
+      </div>-->
+
+      <!--<div id="users" *ngIf="activeTab === 'users'">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users | orderBy: ['username']; let i = index" class="story" (click)="openUserDetails(user._id)">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.username }}</td>
+              <td>
+                <span class="label" [class.label-danger]="user.role === 'admin'" [class.label-primary]="user.role === 'family'" [class.label-default]="user.role === 'friend'">
+                  {{ user.role }}
+                </span>
+              </td>
+              <td>{{ user.readPosts.length }}</td>
+            </tr>
+          </tbody>-->
+        <!--</table>
+        <button class="btn btn-default" (click)="openNewUser()">Create new user</button>
+      </div>
+
+      <div id="stats" *ngIf="activeTab === 'stats'">
+
+        <table class="table table-hover">
+          <caption>Top Posts</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Views</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let post of posts | orderBy: ['viewCount']:'desc' | limitTo: 5; let i = index" class="story">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ post.title }}</td>
+              <td>{{ post.viewCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-hover">
+          <caption>Top Users</caption>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Read</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users | orderBy: ['readPosts.length']:'desc' | limitTo: 5; let i = index" class="story">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ user.username }}</td>
+              <td>{{ user.readPosts.length }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>-->
+
+    </div><!-- col-md-12 -->
+  </div><!-- row -->
+</div>

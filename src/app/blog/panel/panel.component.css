@@ -1,0 +1,41 @@
+div.post-panel {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  height: 100px;
+  border-bottom: 1px solid lightgray;
+  font-size: 34px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 25px;
+
+  /* background: top left / cover no-repeat; */
+  /*background-position: bottom left;*/
+  background: left / cover;
+}
+
+.hasBackground {
+  color: white;
+  text-shadow: 
+    -1px 0 rgba(0, 0, 0, 0.3),
+    0 1px rgba(0, 0, 0, 0.3),
+    1px 0 rgba(0, 0, 0, 0.3),
+    0 -1px rgba(0, 0, 0, 0.3);
+}
+
+p.subtitle {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+}
+
+span.date {
+  margin-left: 6px;
+}
+
+/* expand post panels on smaller devices */
+@media (max-width: 991px) {
+  div.post-panel {
+    width: 100vw;
+  }
+}

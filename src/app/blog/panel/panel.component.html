@@ -1,0 +1,28 @@
+<div>
+  <div class="post-panel" (click)="onClick()" [style.opacity]="getOpacity()" [class.hasBackground]="post.hasBackground" [style.background-image]="getBackgroundImage()">
+    {{ post.title }}
+    <!--<span class="label label-default new-label">New</span>-->
+    <p class="subtitle">
+      <i class="fa fa-map-marker" aria-hidden="true"></i>
+      {{ post.subtitle }}
+
+      <span class="date">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>{{ getFormattedDate(post.publishedAt) }}</span>
+      </span>
+
+      <span class="date">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+        <span>{{ post.likes.length }}</span>
+      </span>
+      
+      <span class="date">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+        <span>{{ post.comments.length }}</span>
+      </span>
+
+    </p>
+
+  </div>
+
+</div>

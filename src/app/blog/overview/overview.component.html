@@ -1,0 +1,6 @@
+<div *ngIf="loading" class="vcenter">
+  <div class="loader"></div>
+</div>
+
+<app-panel *ngFor="let post of posts | orderBy: ['publishedAt']: 'desc' | limitTo: limit" [post]="post" (click)="showPost(post._id)"></app-panel>
+<button *ngIf="hasMore()" class="btn btn-default center-block show-more" (click)="raiseLimit()">zeige ältere</button>

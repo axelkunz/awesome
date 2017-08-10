@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:400,700");
+
+#comments {
+  padding-top: 5px;
+  border-top: 1px solid lightgray;
+}
+.comment {
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  font-size: 16px;
+}
+
+.meta {
+}
+
+.comment-user {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.comment-timespan {
+  font-size: 11px;
+  font-weight: light;
+  color: grey;
+}
+
+i.fa-trash {
+  color: gray;
+  margin-left: 5px;
+}
+
+#comment-area {
+  float: left;
+  width: 75%;
+  border: none;
+  box-shadow: none;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 0;
+  font-size: 16px;
+  resize: none;
+}
+
+#send {
+  float: right;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 16px;
+  color: dodgerblue;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+#send.inactive {
+  opacity: 0.4;
+  color: dimgray;
+  cursor: unset;
+}

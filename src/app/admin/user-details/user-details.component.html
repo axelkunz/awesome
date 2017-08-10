@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Edit user</h3>
+
+      <form *ngIf="user">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="user.username" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>Role</label>
+          <select class="form-control" name="role" [(ngModel)]="user.role">
+            <option *ngFor="let role of roles" value="{{ role }}">{{ role }}</option>
+          </select>
+        </div>
+
+        <button class="btn btn-default" (click)="save()">save</button>
+        <button class="btn btn-danger pull-right" (click)="delete()">delete</button>
+      </form>
+    </div>
+  </div>
+</div>

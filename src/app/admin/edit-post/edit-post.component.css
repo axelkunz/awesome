@@ -1,0 +1,29 @@
+.container {
+    margin-bottom: 15px;
+}
+
+.media-object {
+    max-width: 64px;
+    max-height: 100px;
+}
+
+.location-icon {
+    width: 15px;
+    margin-right: 5px;
+}
+
+#save-button {
+    margin-bottom: 20px;
+}
+
+.img-rounded {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 5px;
+}
+
+img.used {
+    opacity: 0.8;
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}

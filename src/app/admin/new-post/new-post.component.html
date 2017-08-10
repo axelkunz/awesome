@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Create new post</h3>
+      <form>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" [(ngModel)]="newPost.title">
+        </div>
+
+        <div class="form-group">
+          <label>Subtitle</label>
+          <input type="text" class="form-control" placeholder="Subtitle" name="subtitle" [(ngModel)]="newPost.subtitle">
+        </div>
+
+        <div class="form-group">
+          <label>Text</label>
+          <textarea class="form-control" placeholder="Text" rows="10" name="text" [(ngModel)]="newPost.text"></textarea>
+        </div>
+
+        <button class="btn btn-default" (click)="create()" [disabled]="!newPost.title || !newPost.subtitle || !newPost.text">create</button>
+      </form>
+    </div>
+  </div>
+</div>

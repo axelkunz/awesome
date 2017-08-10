@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 login">
+      <form>
+
+        <div class="form-group">
+          <label for="inputUsername">Benutzername</label>
+          <input type="text" class="form-control" id="inputUsername" placeholder="Benutzername" [(ngModel)]="username" name="username" autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Passwort</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Passwort" [(ngModel)]="password" name="password">
+        </div>
+
+        <button type="submit" class="btn btn-default" (click)="onClick()" [disabled]="!username || isLocked">Anmelden</button>
+
+      </form>
+
+      <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Fehler!</strong> {{ errorMsg }}
+      </div>
+
+    </div>
+  </div>
+</div>
