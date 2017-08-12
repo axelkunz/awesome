@@ -4,14 +4,18 @@ import { Router } from '@angular/router'
 import { AuthService } from '../shared/auth.service'
 import { UserService } from '../user.service'
 
+interface User {
+  username: string
+  password: string
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string
-  password: string
+  user: User
   errorMsg: string
   isLocked: boolean
 
@@ -20,6 +24,10 @@ export class LoginComponent {
       // private userService: UserService,
       // private router: Router
   ) {
+    this.user = {
+      username: '',
+      password: ''
+    }
     this.isLocked = true
   }
 
@@ -32,8 +40,20 @@ export class LoginComponent {
   //     .catch(() => this.isLocked = false)
   // }
 
+  onUsernameChange(input: string) {
+    this.user.username = input
+    this.isLocked = !this.user.username || !this.user.password
+  }
+
+  onPasswordChange(input: string) {
+    this.user.password = input
+    this.isLocked = !this.user.username || !this.user.password
+  }
+
   onButtonClick() {
     this.isLocked = true
+    console.log('clicky')
+
       // this.authService.login(this.username, this.password).then(() => {
       //     this.router.navigateByUrl('/')
       //     this.isLocked = false
@@ -41,18 +61,6 @@ export class LoginComponent {
       //     this.errorMsg = err
       //     this.isLocked = false
       // })
-  }
-
-  onUsernameChange(input: string) {
-    console.log(input)
-
-    this.username = input
-    this.isLocked = !this.username || !this.password
-  }
-
-  onPasswordChange(input: string) {
-    this.password = input
-    this.isLocked = !this.username || !this.password
   }
 
 }

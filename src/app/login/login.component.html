@@ -2,22 +2,21 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3 login">
-      <form>
-        <!-- insert username -->
-        <div class="form-group">
-          <label for="inputUsername">Benutzername</label>
-          <input #username type="text" class="form-control" id="inputUsername" placeholder="Benutzername" (keyup)="onUsernameChange(username.value)" name="username" autofocus>
-        </div>
 
-        <!-- insert password -->
-        <div class="form-group">
-          <label for="inputPassword">Passwort</label>
-          <input #password type="password" class="form-control" id="inputPassword" placeholder="Passwort" (keyup)="onPasswordChange(password.value)" name="password">
-        </div>
-      </form>
+      <!-- insert username -->
+      <div class="form-group">
+        <label for="inputUsername">Benutzername</label>
+        <input #name type="text" class="form-control" id="inputUsername" placeholder="Benutzername" name="username" (input)="onUsernameChange(name.value)" required autofocus>
+      </div>
 
-      <!-- login -->
-      <button type="button" class="btn btn-outline-primary btn-block" (click)="onButtonClick()" [disabled]="isLocked">
+      <!-- insert password -->
+      <div class="form-group">
+        <label for="inputPassword">Passwort</label>
+        <input #pw type="password" class="form-control" id="inputPassword" placeholder="Passwort" name="password" (input)="onPasswordChange(pw.value)" required>
+      </div>
+
+        <!-- login -->
+      <button type="submit" class="btn btn-outline-primary btn-block" (click)="onButtonClick()" [disabled]="isLocked">
         Anmelden
       </button>
 

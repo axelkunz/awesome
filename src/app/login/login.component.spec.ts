@@ -34,6 +34,7 @@ describe('Component: Login', () => {
     buttonEl = element.querySelector('button')
     usernameEl = element.querySelector('input#inputUsername')
     passwordEl = element.querySelector('input#inputPassword')
+    fixture.detectChanges()
   }))
 
   it('should create the component', async(() => {
@@ -41,7 +42,6 @@ describe('Component: Login', () => {
   }))
 
   it('should render username and password fields', async(() => {
-    fixture.detectChanges()
     expect(usernameEl).toBeTruthy()
     expect(usernameEl.placeholder).toContain('Benutzername')
     expect(usernameEl.value).toBe('')
@@ -51,82 +51,51 @@ describe('Component: Login', () => {
     expect(passwordEl.value).toBe('')
   }))
 
-  it('should call onKey event when username is entered', async(() => {
-    spyOn(component, 'onUsernameChange')
-    usernameEl.value = 'John Doe'
-    fixture.detectChanges()
-    usernameEl.dispatchEvent(new Event('keyup'))
-
-    fixture.whenStable().then(() => {
-      expect(component.onUsernameChange).toHaveBeenCalled()
-    })
-  }))
-
-  it('should call onKey event when password is entered', async(() => {
-    spyOn(component, 'onPasswordChange')
-    passwordEl.dispatchEvent(new Event('keyup'))
-
-    fixture.whenStable().then(() => {
-      expect(component.onPasswordChange).toHaveBeenCalled()
-    })
-  }))
-
   it('should assign entered values to component variables')
 
   it('should disable button when no credentials given', () => {
-    fixture.detectChanges()
     expect(buttonEl).toBeTruthy()
     expect(buttonEl.disabled).toBeTruthy()
   })
 
   it('should keep button disabled when only username given', () => {
-    fixture.detectChanges()
     usernameEl.value = 'John Doe'
+    usernameEl.dispatchEvent(new Event('input'))
     fixture.detectChanges()
 
     expect(buttonEl.disabled).toBeTruthy()
   })
 
   it('should keep button disabled when only password given', () => {
-    fixture.detectChanges()
     passwordEl.value = 'some_password'
+    passwordEl.dispatchEvent(new Event('input'))
     fixture.detectChanges()
 
     expect(buttonEl.disabled).toBeTruthy()
   })
 
-  // it('should enable button when credentials given', async(() => {
-  //   fixture.detectChanges()
-  //   usernameEl.value = 'John Doe'
-  //   passwordEl.value = 'some_password'
-  //   fixture.detectChanges()
+  it('should enable button when credentials given', () => {
+    usernameEl.value = 'John Doe'
+    usernameEl.dispatchEvent(new Event('input'))
+    passwordEl.value = 'some_password'
+    passwordEl.dispatchEvent(new Event('input'))
+    fixture.detectChanges()
 
-  //   fixture.whenStable().then(() => {
-  //     expect(buttonEl.disabled).toBeFalsy()
-  //   })
+    expect(buttonEl.disabled).toBeFalsy()
+  })
 
-  // }))
+  it('should lock login button when clicked', () => {
+    expect(buttonEl.disabled).toBeTruthy()
+    usernameEl.value = 'John Doe'
+    usernameEl.dispatchEvent(new Event('input'))
+    passwordEl.value = 'some_password'
+    passwordEl.dispatchEvent(new Event('input'))
+    fixture.detectChanges()
+    expect(buttonEl.disabled).toBeFalsy()
 
-  it('should call onClick handler', async(() => {
-    spyOn(component, 'onButtonClick')
-    component.username = 'John Doe'
-    component.password = 'some_password'
     buttonEl.click()
-
-    fixture.whenStable().then(() => {
-      expect(component.onButtonClick).toHaveBeenCalled()
-    })
-  }))
-
-  // it('should lock login button when clicked', async(() => {
-  //   component.username = 'John Doe'
-  //   component.password = 'some_password'
-  //   expect(buttonEl.disabled).toBeFalsy()
-  //   buttonEl.click()
-
-  //   fixture.whenStable().then(() => {
-  //     expect(buttonEl.disabled).toBeTruthy()
-  //   })
-  // }))
+    fixture.detectChanges()
+    expect(buttonEl.disabled).toBeTruthy()
+  })
 
 })
