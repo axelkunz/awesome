@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { UserService } from '../user.service'
 import { AuthService } from '../shared/auth.service'
+import { UserService } from '../user.service'
 
 @Component({
   selector: 'app-login',
@@ -10,19 +10,17 @@ import { AuthService } from '../shared/auth.service'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   username: string
   password: string
   errorMsg: string
+  isLocked: boolean
 
   constructor(
       // private authService: AuthService,
       // private userService: UserService,
       // private router: Router
-  ) {}
-
-  public isLocked(): boolean {
-    return !this.username || !this.password
+  ) {
+    this.isLocked = true
   }
 
   // ngOnInit() {
@@ -34,19 +32,27 @@ export class LoginComponent {
   //     .catch(() => this.isLocked = false)
   // }
 
-  // onClick() {
-  //     this.isLocked = true
-  //     this.authService.login(this.username, this.password).then(() => {
-  //         this.router.navigateByUrl('/')
-  //         this.isLocked = false
-  //     }).catch(err => {
-  //         this.errorMsg = err
-  //         this.isLocked = false
-  //     })
-  // }
-
-  onKey(event: any) {
-    if (event.target.id === 'inputUsername') this.username = event.target.value
-    if (event.target.id === 'inputPassword') this.password = event.target.value
+  onButtonClick() {
+    this.isLocked = true
+      // this.authService.login(this.username, this.password).then(() => {
+      //     this.router.navigateByUrl('/')
+      //     this.isLocked = false
+      // }).catch(err => {
+      //     this.errorMsg = err
+      //     this.isLocked = false
+      // })
   }
+
+  onUsernameChange(input: string) {
+    console.log(input)
+
+    this.username = input
+    this.isLocked = !this.username || !this.password
+  }
+
+  onPasswordChange(input: string) {
+    this.password = input
+    this.isLocked = !this.username || !this.password
+  }
+
 }
