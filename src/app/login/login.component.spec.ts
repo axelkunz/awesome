@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing'
+import { TestBed, async, tick, fakeAsync } from '@angular/core/testing'
 import { Router } from '@angular/router'
 import { DebugElement } from '@angular/core'
 
@@ -6,7 +6,15 @@ import { UserService } from '../user.service'
 import { AuthService } from '../shared/auth.service'
 import { LoginComponent } from './login.component'
 
-class AuthServiceMock {}
+class MockAuthService {
+  isLoggedIn (): Promise<any> {
+    return new Promise((resolve, reject) => reject())
+  }
+
+  login (): Promise<any> {
+    return new Promise((resolve, reject) => reject('some error'))
+  }
+}
 
 describe('Component: Login', () => {
   let fixture // : ComponentFixture<LoginComponent>
@@ -22,8 +30,7 @@ describe('Component: Login', () => {
         LoginComponent
       ],
       providers: [
-        { provide: AuthService, useClass: new AuthServiceMock() },
-        { provide: UserService, useClass: new AuthServiceMock() }
+        { provide: AuthService, useClass: MockAuthService }
       ]
     }).compileComponents()
 
@@ -97,5 +104,26 @@ describe('Component: Login', () => {
     fixture.detectChanges()
     expect(buttonEl.disabled).toBeTruthy()
   })
+
+  // it('should show error when login unsuccessful', fakeAsync(() => {
+  //   spyOn(component, 'onButtonClick')
+  //   usernameEl.value = 'John Doe'
+  //   usernameEl.dispatchEvent(new Event('input'))
+  //   passwordEl.value = 'some_password'
+  //   passwordEl.dispatchEvent(new Event('input'))
+  //   fixture.detectChanges()
+  //   buttonEl.click()
+
+  //   tick()
+  //   fixture.detectChanges()
+
+  //   fixture.whenStable().then(() => {
+  //     fixture.detectChanges();
+  //     expect(usernameEl.classList).toContain('invalid')
+  //     // expect(el.nativeElement.textContent.trim()).toBe('Logout');
+  //   })
+
+
+  // }))
 
 })

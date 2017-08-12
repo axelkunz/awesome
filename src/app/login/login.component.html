@@ -1,30 +1,24 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3 login">
+    <div class="col-md-3">
 
       <!-- insert username -->
       <div class="form-group">
         <label for="inputUsername">Benutzername</label>
-        <input #name type="text" class="form-control" id="inputUsername" placeholder="Benutzername" name="username" (input)="onUsernameChange(name.value)" required autofocus>
+        <input #name type="text" class="form-control" [class.invalid]="errorMsg" id="inputUsername" placeholder="Benutzername" name="username" (input)="onUsernameChange(name.value)" required autofocus>
       </div>
 
       <!-- insert password -->
       <div class="form-group">
         <label for="inputPassword">Passwort</label>
-        <input #pw type="password" class="form-control" id="inputPassword" placeholder="Passwort" name="password" (input)="onPasswordChange(pw.value)" required>
+        <input #pw type="password" class="form-control" [class.invalid]="errorMsg" id="inputPassword" placeholder="Passwort" name="password" (input)="onPasswordChange(pw.value)" required>
       </div>
 
-        <!-- login -->
-      <button type="submit" class="btn btn-outline-primary btn-block" (click)="onButtonClick()" [disabled]="isLocked">
+      <!-- login -->
+      <button type="submit" class="btn btn-outline-primary btn-block" (click)="onButtonClick()" [disabled]="!user.username || !user.password || isValidating">
         Anmelden
       </button>
-
-      <!-- error msg -->
-      <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Fehler!</strong> {{ errorMsg }}
-      </div>
 
     </div>
   </div>
