@@ -7,3 +7,5 @@ cache:
 script:
   - npm run test-single
   - npm run build
+addons:
+  chrome: stable
