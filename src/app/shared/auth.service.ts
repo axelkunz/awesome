@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core'
-import { Http, Headers, RequestOptions } from '@angular/http'
+import { Headers, Http, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Rx'
-
-import { ConfigService } from './config.service'
 import { User } from '../user'
+import { ConfigService } from './config.service'
 
-interface Response {
+interface VerificationResponse {
   success: boolean
   message: string
+}
+
+interface LoginResponse {
+  success: boolean
+  message: string
+  token: string
+  user: {
+    username: string
+    role: string
+  }
 }
 
 @Injectable()
@@ -22,16 +31,12 @@ export class AuthService {
     private http: Http
   ) { }
 
-  getUser(): User {
-    return JSON.parse(localStorage.getItem('user'))
-  }
-
   getToken(): string {
-    let user: User = JSON.parse(localStorage.getItem('user'))
+    const user: User = JSON.parse(localStorage.getItem('user'))
     return user.token
   }
 
-  async isLoggedIn(): Promise<any> {
+  async isLoggedIn(): Promise<VerificationResponse> {
     if (!this.getToken()) {
       throw new Error('no token provided')
     }
@@ -43,7 +48,7 @@ export class AuthService {
 
     headers.append('Authorization', `Bearer ${ authToken }`)
 
-    let data: Response
+    let data: VerificationResponse
     try {
       const response = await this.http.post(this.configService.HOST + '/auth/verify', {}, options).toPromise()
       data = response.json()
@@ -56,43 +61,51 @@ export class AuthService {
     return data
   }
 
-  login(username: string, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  async login(username: string, password: string): Promise<LoginResponse> {
+    const headers = new Headers({ 'Content-Type': 'application/json' })
+    const options = new RequestOptions({ headers: headers })
 
-      console.log('logging in!!!')
+    let data: LoginResponse
+    try {
+      const res = await this.http.post(
+        this.configService.API_ADDRESS + '/auth/login',
+        { username: username, password: password },
+        options
+      ).toPromise()
+      data = res.json()
+    } catch (error) {
+      this._deleteUser()
+      throw new Error('something went wrong on the server while trying to login: ' + error)
+    }
 
-      let headers = new Headers({ 'Content-Type': 'application/json' })
-      let options = new RequestOptions({ headers: headers })
-      let postData = { username: username, password: password }
+    // TODO: check this server-side
+    if (!data.success || !data.token) {
+      this._deleteUser()
+      throw new Error('login unsuccessfull')
+    }
 
-      return this.http.post(this.configService.API_ADDRESS + '/auth/login', postData, options)
-        .toPromise()
-        .then(res => {
-            let data = res.json()
-            if (data.success && data.token) {
-                let user = {
-                    username: data.user.username,
-                    role: data.user.role,
-                    token: data.token
-                }
-                localStorage.setItem('user', JSON.stringify(user))
-                resolve()
-            } else {
-                localStorage.removeItem('user')
-                reject(data.message)
-            }
-        })
-        .catch(res => {
-            localStorage.removeItem('user')
-            reject('something went wrong on the server while trying to login')
-        })
-    })
+    const user: User = {
+      username: data.user.username,
+      role: data.user.role,
+      token: data.token
+    }
+    this._setUser(user)
+    return(data)
   }
 
-  logout(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      localStorage.removeItem('user')
-      resolve()
-    })
+  logout(): void {
+    localStorage.removeItem('user')
+  }
+
+  getUser(): User {
+    return JSON.parse(localStorage.getItem('user'))
+  }
+
+  _setUser(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  _deleteUser(): void {
+    localStorage.removeItem('user')
   }
 }
