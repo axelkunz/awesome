@@ -1,10 +1,9 @@
-import { TestBed, async, tick, fakeAsync } from '@angular/core/testing'
-import { Router } from '@angular/router'
-import { DebugElement } from '@angular/core'
-
-import { UserService } from '../user.service'
 import { AuthService } from '../shared/auth.service'
+import { DebugElement } from '@angular/core'
 import { LoginComponent } from './login.component'
+import { Router } from '@angular/router'
+import { TestBed, async, tick, fakeAsync } from '@angular/core/testing'
+import { UserService } from '../user.service'
 
 class MockAuthService {
   isLoggedIn (): Promise<any> {
@@ -30,7 +29,8 @@ describe('Component: Login', () => {
         LoginComponent
       ],
       providers: [
-        { provide: AuthService, useClass: MockAuthService }
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: Router }
       ]
     }).compileComponents()
 
@@ -104,6 +104,12 @@ describe('Component: Login', () => {
     fixture.detectChanges()
     expect(buttonEl.disabled).toBeTruthy()
   })
+
+  // it('should forward to / when already logged in', () => {
+  //   MockAuthService.isLoggedIn(): Promise<any> {
+  //     return new Promise((resolve, reject) => reject())
+  //   }
+  // })
 
   // it('should show error when login unsuccessful', fakeAsync(() => {
   //   spyOn(component, 'onButtonClick')

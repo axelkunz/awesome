@@ -29,7 +29,18 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome', 'PhantomJS'],
+    customLaunchers: {
+      'PhantomJS_Desktop': {
+        base: 'PhantomJS',
+          options: {
+            viewportSize: {
+              width: 1228,
+              height: 1000
+          }
+        }
+      }
+    },
+    browsers: ['Chrome', 'PhantomJS_Desktop'], // 'PhantomJS'
     singleRun: false
-  });
-};
+  })
+}

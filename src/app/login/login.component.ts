@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     // private userService: UserService,
-    // private router: Router
+    private router: Router
   ) {
     this.user = {
       username: '',
@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.isValidating = true
     this.authService.isLoggedIn().then(() => {
-      // this.router.navigateByUrl('/')
-      // console.log('is logged in!')
+      this.router.navigateByUrl('/')
     })
     .catch(() => this.isValidating = false)
   }
@@ -53,6 +52,8 @@ export class LoginComponent implements OnInit {
     this.isValidating = true
     this.authService.login(this.user.username, this.user.password).then(() => {
       // this.router.navigateByUrl('/')
+      console.log('WORKED!!! :D')
+
       this.isValidating = false
     }).catch(err => {
       this.errorMsg = err

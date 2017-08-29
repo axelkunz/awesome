@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "test-travis": "ng test --single-run=true --browser PhantomJS",
+    "test-travis": "ng test --single-run=true --browser PhantomJS_Desktop",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit, OnChanges, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('WORKS')
+
     this.sub = this.route.params.subscribe(params => {
       console.log(params)
 
