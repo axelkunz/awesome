@@ -28,14 +28,19 @@ export class LoginComponent implements OnInit {
       username: '',
       password: ''
     }
+    this.isValidating = false
   }
 
-  ngOnInit() {
-    this.isValidating = true
-    this.authService.isLoggedIn().then(() => {
+  async ngOnInit() {
+    // redirect if user is already logged in
+    try {
+      this.isValidating = true
+      await this.authService.isLoggedIn()
       this.router.navigateByUrl('/')
-    })
-    .catch(() => this.isValidating = false)
+    } catch (e) {
+      this.isValidating = false
+      console.log(e)
+    }
   }
 
   onUsernameChange(input: string) {
@@ -48,17 +53,14 @@ export class LoginComponent implements OnInit {
     this.errorMsg = null
   }
 
-  onButtonClick() {
-    this.isValidating = true
-    this.authService.login(this.user.username, this.user.password).then(() => {
-      // this.router.navigateByUrl('/')
-      console.log('WORKED!!! :D')
-
+  async onButtonClick() {
+    try {
+      this.isValidating = true
+      this.authService.login(this.user.username, this.user.password)
+      this.router.navigateByUrl('/')
+    } catch (err) {
       this.isValidating = false
-    }).catch(err => {
       this.errorMsg = err
-      this.isValidating = false
-    })
+    }
   }
-
 }
