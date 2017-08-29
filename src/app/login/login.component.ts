@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/')
     } catch (e) {
       this.isValidating = false
-      console.log(e)
+      // console.log(e)
     }
   }
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   async onButtonClick() {
     try {
       this.isValidating = true
-      this.authService.login(this.user.username, this.user.password)
+      await this.authService.login(this.user.username, this.user.password)
       this.router.navigateByUrl('/')
     } catch (err) {
       this.isValidating = false

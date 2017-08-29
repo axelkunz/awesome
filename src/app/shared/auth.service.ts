@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core'
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { Http, Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Rx'
 
 import { ConfigService } from './config.service'
 import { User } from '../user'
+
+interface Response {
+  success: boolean
+  message: string
+}
 
 @Injectable()
 export class AuthService {
@@ -26,34 +31,29 @@ export class AuthService {
     return user.token
   }
 
-  isLoggedIn(): Promise<any> {
-    return new Promise((resolve, reject) => {
+  async isLoggedIn(): Promise<any> {
+    if (!this.getToken()) {
+      throw new Error('no token provided')
+    }
 
-      // console.log(this.getToken())
-      if (!this.getToken()) {
-        console.log('no token')
-        reject(false)
-      }
+    // check if token is valid
+    const headers = new Headers({ 'Content-Type': 'application/json' })
+    const options = new RequestOptions({ headers: headers })
+    const authToken = this.getToken()
 
-      // check if token is valid
-      let headers = new Headers({ 'Content-Type': 'application/json' })
-      let options = new RequestOptions({ headers: headers })
-      let authToken = this.getToken()
+    headers.append('Authorization', `Bearer ${ authToken }`)
 
-      headers.append('Authorization', `Bearer ${ authToken }`)
+    let data: Response
+    try {
+      const response = await this.http.post(this.configService.HOST + '/auth/verify', {}, options).toPromise()
+      data = response.json()
+    } catch (error) {
+      throw new Error(data.message || 'Server error')
+    }
 
-      return this.http.post(this.configService.HOST + '/auth/verify', {}, options)
-        .toPromise()
-        .then(res => {
-            let data = res.json()
-            if (data.success) {
-                resolve(data)
-            } else {
-                reject(data)
-            }
-        })
-        .catch((res: any) => reject(res.json() || 'Server error'))
-    })
+    if (!data.success) throw new Error('verification unsuccessful. invalid token?')
+
+    return data
   }
 
   login(username: string, password: string): Promise<any> {

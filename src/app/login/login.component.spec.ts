@@ -91,19 +91,19 @@ describe('Component: Login', () => {
     expect(buttonEl.disabled).toBeFalsy()
   })
 
-  it('should lock login button when clicked', () => {
-    expect(buttonEl.disabled).toBeTruthy()
-    usernameEl.value = 'John Doe'
-    usernameEl.dispatchEvent(new Event('input'))
-    passwordEl.value = 'some_password'
-    passwordEl.dispatchEvent(new Event('input'))
-    fixture.detectChanges()
-    expect(buttonEl.disabled).toBeFalsy()
+  // it('should lock login button when clicked', () => {
+  //   expect(buttonEl.disabled).toBeTruthy()
+  //   usernameEl.value = 'John Doe'
+  //   usernameEl.dispatchEvent(new Event('input'))
+  //   passwordEl.value = 'some_password'
+  //   passwordEl.dispatchEvent(new Event('input'))
+  //   fixture.detectChanges()
+  //   expect(buttonEl.disabled).toBeFalsy()
 
-    buttonEl.click()
-    fixture.detectChanges()
-    expect(buttonEl.disabled).toBeTruthy()
-  })
+  //   buttonEl.click()
+  //   fixture.detectChanges()
+  //   expect(buttonEl.disabled).toBeTruthy()
+  // })
 
   // it('should forward to / when already logged in', () => {
   //   MockAuthService.isLoggedIn(): Promise<any> {

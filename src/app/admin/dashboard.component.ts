@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('INIT ADMIN DASHBOARD')
+
     // if (!this.authService.isLoggedIn() || !this.hasAccess()) {
     //     this.router.navigateByUrl(`/`)
     // }
